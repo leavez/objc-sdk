@@ -48,7 +48,7 @@ NSString *const LCIMMessageErrorDomain =
     GPBNSStringifySymbol(LCIMMessageErrorDomain);
 
 #ifdef DEBUG
-NSString *const GPBExceptionMessageKey =
+NSString *const LCIMExceptionMessageKey =
     GPBNSStringifySymbol(LCIMExceptionMessage);
 #endif  // DEBUG
 
@@ -2001,8 +2001,8 @@ static LCIMUnknownFieldSet *GetOrMakeUnknownFields(LCIMMessage *self) {
 - (BOOL)parseUnknownField:(LCIMCodedInputStream *)input
         extensionRegistry:(LCIMExtensionRegistry *)extensionRegistry
                       tag:(uint32_t)tag {
-  GPBWireFormat wireType = GPBWireFormatGetTagWireType(tag);
-  int32_t fieldNumber = GPBWireFormatGetTagFieldNumber(tag);
+  GPBWireFormat wireType = LCIMWireFormatGetTagWireType(tag);
+  int32_t fieldNumber = LCIMWireFormatGetTagFieldNumber(tag);
 
   LCIMDescriptor *descriptor = [self descriptor];
   LCIMExtensionDescriptor *extension =

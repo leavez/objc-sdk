@@ -121,7 +121,7 @@ static void GPBWriteUInt32(GPBOutputBufferState *state, int32_t fieldNumber,
 
 static void GPBWriteTagWithFormat(GPBOutputBufferState *state,
                                   uint32_t fieldNumber, GPBWireFormat format) {
-  GPBWriteRawVarint32(state, GPBWireFormatMakeTag(fieldNumber, format));
+  GPBWriteRawVarint32(state, LCIMWireFormatMakeTag(fieldNumber, format));
 }
 
 static void GPBWriteRawLittleEndian32(GPBOutputBufferState *state,
@@ -1180,7 +1180,7 @@ size_t LCIMComputeRawMessageSetExtensionSize(int32_t fieldNumber,
 
 size_t LCIMComputeTagSize(int32_t fieldNumber) {
   return LCIMComputeRawVarint32Size(
-      GPBWireFormatMakeTag(fieldNumber, GPBWireFormatVarint));
+      LCIMWireFormatMakeTag(fieldNumber, GPBWireFormatVarint));
 }
 
 size_t LCIMComputeWireFormatTagSize(int field_number, GPBDataType dataType) {

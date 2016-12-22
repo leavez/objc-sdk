@@ -278,7 +278,7 @@ static void GPBUnknownFieldSetSerializedSizeAsMessageSet(const void *key,
 }
 
 + (BOOL)isFieldTag:(int32_t)tag {
-  return GPBWireFormatGetTagWireType(tag) != GPBWireFormatEndGroup;
+  return LCIMWireFormatGetTagWireType(tag) != GPBWireFormatEndGroup;
 }
 
 - (void)addField:(LCIMUnknownField *)field {
@@ -353,9 +353,9 @@ static void GPBUnknownFieldSetMergeUnknownFields(const void *key,
 }
 
 - (BOOL)mergeFieldFrom:(int32_t)tag input:(LCIMCodedInputStream *)input {
-  int32_t number = GPBWireFormatGetTagFieldNumber(tag);
+  int32_t number = LCIMWireFormatGetTagFieldNumber(tag);
   GPBCodedInputStreamState *state = &input->state_;
-  switch (GPBWireFormatGetTagWireType(tag)) {
+  switch (LCIMWireFormatGetTagWireType(tag)) {
     case GPBWireFormatVarint: {
       LCIMUnknownField *field = [self mutableFieldForNumber:number create:YES];
       [field addVarint:LCIMCodedInputStreamReadInt64(state)];

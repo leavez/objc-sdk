@@ -319,12 +319,12 @@ uint32_t LCIMFieldTag(LCIMFieldDescriptor *self) {
   GPBWireFormat format;
   if ((description->flags & GPBFieldMapKeyMask) != 0) {
     // Maps are repeated messages on the wire.
-    format = GPBWireFormatForType(GPBDataTypeMessage, NO);
+    format = LCIMWireFormatForType(GPBDataTypeMessage, NO);
   } else {
-    format = GPBWireFormatForType(description->dataType,
+    format = LCIMWireFormatForType(description->dataType,
                                   ((description->flags & GPBFieldPacked) != 0));
   }
-  return GPBWireFormatMakeTag(description->number, format);
+  return LCIMWireFormatMakeTag(description->number, format);
 }
 
 uint32_t LCIMFieldAlternateTag(LCIMFieldDescriptor *self) {
@@ -332,9 +332,9 @@ uint32_t LCIMFieldAlternateTag(LCIMFieldDescriptor *self) {
   NSCAssert((description->flags & GPBFieldRepeated) != 0,
             @"Only valid on repeated fields");
   GPBWireFormat format =
-      GPBWireFormatForType(description->dataType,
+      LCIMWireFormatForType(description->dataType,
                            ((description->flags & GPBFieldPacked) == 0));
-  return GPBWireFormatMakeTag(description->number, format);
+  return LCIMWireFormatMakeTag(description->number, format);
 }
 
 @implementation LCIMFieldDescriptor {
@@ -873,14 +873,14 @@ uint32_t LCIMFieldAlternateTag(LCIMFieldDescriptor *self) {
 }
 
 - (GPBWireFormat)wireType {
-  return GPBWireFormatForType(description_->dataType,
+  return LCIMWireFormatForType(description_->dataType,
                               LCIMExtensionIsPacked(description_));
 }
 
 - (GPBWireFormat)alternateWireType {
   NSAssert(LCIMExtensionIsRepeated(description_),
            @"Only valid on repeated extensions");
-  return GPBWireFormatForType(description_->dataType,
+  return LCIMWireFormatForType(description_->dataType,
                               !LCIMExtensionIsPacked(description_));
 }
 

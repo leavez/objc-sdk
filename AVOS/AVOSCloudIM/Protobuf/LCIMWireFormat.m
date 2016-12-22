@@ -37,19 +37,19 @@ enum {
   GPBWireFormatTagTypeMask = 7 /* = (1 << GPBWireFormatTagTypeBits) - 1 */,
 };
 
-uint32_t GPBWireFormatMakeTag(uint32_t fieldNumber, GPBWireFormat wireType) {
+uint32_t LCIMWireFormatMakeTag(uint32_t fieldNumber, GPBWireFormat wireType) {
   return (fieldNumber << GPBWireFormatTagTypeBits) | wireType;
 }
 
-GPBWireFormat GPBWireFormatGetTagWireType(uint32_t tag) {
+GPBWireFormat LCIMWireFormatGetTagWireType(uint32_t tag) {
   return (GPBWireFormat)(tag & GPBWireFormatTagTypeMask);
 }
 
-uint32_t GPBWireFormatGetTagFieldNumber(uint32_t tag) {
+uint32_t LCIMWireFormatGetTagFieldNumber(uint32_t tag) {
   return LCIMLogicalRightShift32(tag, GPBWireFormatTagTypeBits);
 }
 
-GPBWireFormat GPBWireFormatForType(GPBDataType type, BOOL isPacked) {
+GPBWireFormat LCIMWireFormatForType(GPBDataType type, BOOL isPacked) {
   if (isPacked) {
     return GPBWireFormatLengthDelimited;
   }

@@ -325,7 +325,7 @@ void LCIMCodedInputStreamCheckLastTagWas(GPBCodedInputStreamState *state,
 }
 
 - (BOOL)skipField:(int32_t)tag {
-  switch (GPBWireFormatGetTagWireType(tag)) {
+  switch (LCIMWireFormatGetTagWireType(tag)) {
     case GPBWireFormatVarint:
       LCIMCodedInputStreamReadInt32(&state_);
       return YES;
@@ -338,7 +338,7 @@ void LCIMCodedInputStreamCheckLastTagWas(GPBCodedInputStreamState *state,
     case GPBWireFormatStartGroup:
       [self skipMessage];
       LCIMCodedInputStreamCheckLastTagWas(
-          &state_, GPBWireFormatMakeTag(GPBWireFormatGetTagFieldNumber(tag),
+          &state_, LCIMWireFormatMakeTag(LCIMWireFormatGetTagFieldNumber(tag),
                                         GPBWireFormatEndGroup));
       return YES;
     case GPBWireFormatEndGroup:
@@ -415,7 +415,7 @@ void LCIMCodedInputStreamCheckLastTagWas(GPBCodedInputStreamState *state,
   ++state_.recursionDepth;
   [message mergeFromCodedInputStream:self extensionRegistry:extensionRegistry];
   LCIMCodedInputStreamCheckLastTagWas(
-      &state_, GPBWireFormatMakeTag(fieldNumber, GPBWireFormatEndGroup));
+      &state_, LCIMWireFormatMakeTag(fieldNumber, GPBWireFormatEndGroup));
   --state_.recursionDepth;
 }
 
@@ -429,7 +429,7 @@ void LCIMCodedInputStreamCheckLastTagWas(GPBCodedInputStreamState *state,
   ++state_.recursionDepth;
   [message mergeFromCodedInputStream:self];
   LCIMCodedInputStreamCheckLastTagWas(
-      &state_, GPBWireFormatMakeTag(fieldNumber, GPBWireFormatEndGroup));
+      &state_, LCIMWireFormatMakeTag(fieldNumber, GPBWireFormatEndGroup));
   --state_.recursionDepth;
 }
 

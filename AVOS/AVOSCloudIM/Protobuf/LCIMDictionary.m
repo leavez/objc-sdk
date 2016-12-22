@@ -340,7 +340,7 @@ void LCIMDictionaryWriteToStreamInternalHelper(LCIMCodedOutputStream *outputStre
                                               LCIMFieldDescriptor *field) {
   NSCAssert(field.mapKeyDataType == GPBDataTypeString, @"Unexpected key type");
   GPBDataType mapValueType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [dict enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
     #pragma unused(stop)
     // Write the tag.
@@ -456,9 +456,9 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 
   GPBCodedInputStreamState *state = &stream->state_;
   uint32_t keyTag =
-      GPBWireFormatMakeTag(kMapKeyFieldNumber, GPBWireFormatForType(keyDataType, NO));
+      LCIMWireFormatMakeTag(kMapKeyFieldNumber, LCIMWireFormatForType(keyDataType, NO));
   uint32_t valueTag =
-      GPBWireFormatMakeTag(kMapValueFieldNumber, GPBWireFormatForType(valueDataType, NO));
+      LCIMWireFormatMakeTag(kMapValueFieldNumber, LCIMWireFormatForType(valueDataType, NO));
 
   BOOL hitError = NO;
   while (YES) {
@@ -886,7 +886,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 //%                         asField:(LCIMFieldDescriptor *)field {
 //%  GPBDataType valueDataType = LCIMGetFieldDataType(field);
 //%  GPBDataType keyDataType = field.mapKeyDataType;
-//%  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), LCIMWireFormatLengthDelimited);
+//%  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), LCIMWireFormatLengthDelimited);
 //%  [_dictionary enumerateKeysAndObjectsUsingBlock:^(ENUM_TYPE##KHELPER(KEY_TYPE)##aKey,
 //%                                                   ENUM_TYPE##VHELPER(VALUE_TYPE)##a##VNAME$u,
 //%                                                   BOOL *stop) {
@@ -1088,7 +1088,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 //%- (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
 //%                         asField:(LCIMFieldDescriptor *)field {
 //%  GPBDataType valueDataType = LCIMGetFieldDataType(field);
-//%  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), LCIMWireFormatLengthDelimited);
+//%  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), LCIMWireFormatLengthDelimited);
 //%  for (int i = 0; i < 2; ++i) {
 //%    if (BOOL_DICT_HAS##HELPER(i, )) {
 //%      // Write the tag.
@@ -1651,7 +1651,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -1857,7 +1857,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -2063,7 +2063,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -2269,7 +2269,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -2475,7 +2475,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -2681,7 +2681,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -2887,7 +2887,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -3121,7 +3121,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -3405,7 +3405,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    id aObject,
                                                    BOOL *stop) {
@@ -3615,7 +3615,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -3821,7 +3821,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -4027,7 +4027,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -4233,7 +4233,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -4439,7 +4439,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -4645,7 +4645,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -4851,7 +4851,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -5085,7 +5085,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -5369,7 +5369,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    id aObject,
                                                    BOOL *stop) {
@@ -5579,7 +5579,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -5785,7 +5785,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -5991,7 +5991,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -6197,7 +6197,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -6403,7 +6403,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -6609,7 +6609,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -6815,7 +6815,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -7049,7 +7049,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -7333,7 +7333,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    id aObject,
                                                    BOOL *stop) {
@@ -7543,7 +7543,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -7749,7 +7749,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -7955,7 +7955,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -8161,7 +8161,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -8367,7 +8367,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -8573,7 +8573,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -8779,7 +8779,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -9013,7 +9013,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -9297,7 +9297,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSNumber *aKey,
                                                    id aObject,
                                                    BOOL *stop) {
@@ -9511,7 +9511,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -9725,7 +9725,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -9939,7 +9939,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -10153,7 +10153,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -10367,7 +10367,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -10581,7 +10581,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -10795,7 +10795,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -11037,7 +11037,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
   GPBDataType keyDataType = field.mapKeyDataType;
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   [_dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *aKey,
                                                    NSNumber *aValue,
                                                    BOOL *stop) {
@@ -11353,7 +11353,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 - (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   for (int i = 0; i < 2; ++i) {
     if (_valueSet[i]) {
       // Write the tag.
@@ -11594,7 +11594,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 - (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   for (int i = 0; i < 2; ++i) {
     if (_valueSet[i]) {
       // Write the tag.
@@ -11835,7 +11835,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 - (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   for (int i = 0; i < 2; ++i) {
     if (_valueSet[i]) {
       // Write the tag.
@@ -12076,7 +12076,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 - (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   for (int i = 0; i < 2; ++i) {
     if (_valueSet[i]) {
       // Write the tag.
@@ -12317,7 +12317,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 - (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   for (int i = 0; i < 2; ++i) {
     if (_valueSet[i]) {
       // Write the tag.
@@ -12558,7 +12558,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 - (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   for (int i = 0; i < 2; ++i) {
     if (_valueSet[i]) {
       // Write the tag.
@@ -12799,7 +12799,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 - (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   for (int i = 0; i < 2; ++i) {
     if (_valueSet[i]) {
       // Write the tag.
@@ -13053,7 +13053,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 - (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   for (int i = 0; i < 2; ++i) {
     if (_values[i] != nil) {
       // Write the tag.
@@ -13367,7 +13367,7 @@ void LCIMDictionaryReadEntry(id mapDictionary,
 - (void)writeToCodedOutputStream:(LCIMCodedOutputStream *)outputStream
                          asField:(LCIMFieldDescriptor *)field {
   GPBDataType valueDataType = LCIMGetFieldDataType(field);
-  uint32_t tag = GPBWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
+  uint32_t tag = LCIMWireFormatMakeTag(LCIMFieldNumber(field), GPBWireFormatLengthDelimited);
   for (int i = 0; i < 2; ++i) {
     if (_valueSet[i]) {
       // Write the tag.
